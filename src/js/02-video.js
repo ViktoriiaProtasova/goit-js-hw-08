@@ -14,17 +14,15 @@ const onTimeupdate = throttle(
 
 try {
   const savedSettings = localStorage.getItem('videoplayer-current-time');
-  const parsedSettings = JSON.parse(savedSettings);
-
-  player
-    .setCurrentTime(parsedSettings.seconds)
-    .then(function (seconds) {})
-    .catch(function (error) {
+  const parsedSettings = savedSettings ? JSON.parse(savedSettings) : null;
+  if (parsedSettings && parsedSettings.seconds) {
+    player.setCurrentTime(parsedSettings.seconds).catch(function (error) {
       switch (error.name) {
         case 'RangeError':
           break;
       }
     });
+  }
 } catch (error) {
   console.error('An error occurred:', error);
 }
