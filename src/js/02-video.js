@@ -16,12 +16,7 @@ try {
   const savedSettings = localStorage.getItem('videoplayer-current-time');
   const parsedSettings = savedSettings ? JSON.parse(savedSettings) : null;
   if (parsedSettings && parsedSettings.seconds) {
-    player.setCurrentTime(parsedSettings.seconds).catch(function (error) {
-      switch (error.name) {
-        case 'RangeError':
-          break;
-      }
-    });
+    player.setCurrentTime(parsedSettings.seconds);
   }
 } catch (error) {
   console.error('An error occurred:', error);
